@@ -17,6 +17,7 @@ squash.prototype.reserve = Promise.promisify(function (time, date, resolve) {
   .execute('window.time = "' + time + '"')
   .execute('window.date = "' + date + '"')
   .execute(function (time) {
+
     var slot_col = document.getElementsByClassName('rbm_SlotCol')
     var slot_alt = document. getElementsByClassName('rbm_SlotAltRow')
     var selected_date = document.getElementsByClassName("currdate")[0].children[0].innerHTML
@@ -69,7 +70,7 @@ squash.prototype.reserve = Promise.promisify(function (time, date, resolve) {
       for(child in children) {
         var element_class = children[child].className
         if(element_class === 'rbm_OpenAltCol' || 'rbm_OpenCol') {
-          window.LaunchLockedReserver(window,event,'54', court,'3/26/2016', window.time,'2');
+          window.LaunchLockedReserver(window,event,'54', court, window.date, window.time,'2');
           break;        
         }
         court++
