@@ -1,22 +1,35 @@
 var cheerio = require('cheerio')
 var Promise = require('bluebird')
+var webdriverio = require('webdriverio')
 
-var squash = function (agent) {
-  this._agent = agent
+var squash = function (options) {
+  this._driver = webdriverio
+    .remote(options)
+    .init()
+    .windowHandleSize({width:1000,height:768})
 }
 
 squash.prototype.reserve = Promise.promisify(function (time, resolve) {
-  var agent = this._agent
-  var self = this
-  var url = "http://www.google.com"
+  var driver = this._driver
 
-  agent
-  .get(url)
-  .then(function (response) {
-    if(!response.body) return resolve(error)
-      resolve(null, null)
-  })
 })
 
+squash.prototype.login = Promise.promisify(function (username, password, resolve) {
+
+  var driver = this._driver
+  
+  var log = console.log
+
+  driver
+  .url('http://www.yaleclubnyc.org/default.aspx?p=home&E=0')
+  .setValue('.advLogUsername', username)
+  .setValue('.advLogPassword', password)
+  .click('#btnSecureLogin')
+  .waitForExist('#ulMenuItem_318484', 20000)
+  .end()
+  .then(function () {
+    resolve(null, true)
+  })
+})
 
 module.exports = squash
