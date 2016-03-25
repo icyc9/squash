@@ -13,10 +13,11 @@ squash.prototype.reserve = Promise.promisify(function (time, date, resolve) {
   var driver = this._driver
 
   driver
+  .timeoutsAsyncScript(20000)
   .url('http://www.yaleclubnyc.org/Default.aspx?p=DynamicModule&pageid=387910&ssid=&vnf=1')
   .execute('window.time = "' + time + '"')
   .execute('window.date = "' + date + '"')
-  .execute(function (time) {
+  .executeAsync(function (resolve) {
 
     var slot_col = document.getElementsByClassName('rbm_SlotCol')
     var slot_alt = document. getElementsByClassName('rbm_SlotAltRow')
@@ -71,14 +72,18 @@ squash.prototype.reserve = Promise.promisify(function (time, date, resolve) {
         var element_class = children[child].className
         if(element_class === 'rbm_OpenAltCol' || 'rbm_OpenCol') {
           window.LaunchLockedReserver(window,event,'54', court, window.date, window.time,'2');
-          break;        
+          return resolve(true)
+          break
         }
         court++
       }
+
+      resolve(false)
     }
   })
-
-  resolve(null, true)
+  .then(function (status) {
+    resolve(null, status.value)
+  })
 })
 
 squash.prototype.login = Promise.promisify(function (username, password, resolve) {
