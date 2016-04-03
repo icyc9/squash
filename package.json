@@ -4,15 +4,15 @@
   "description": "Web Scraper for reserving tables",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -w */**.js"
+    "postinstall": "curl -O http://selenium-release.storage.googleapis.com/2.47/selenium-server-standalone-2.47.0.jar",
+    "start_selenium": "java -jar selenium-server-standalone-2.47.0.jar",
+    "test/watch": "mocha -w */**.js"
   },
   "author": "Rob, Snuggs",
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.3.4",
-    "cheerio": "^0.20.0",
-    "superagent": "^1.8.2",
-    "superagent-retry": "^0.5.1"
+    "webdriverio": "^4.0.5"
   },
   "devDependencies": {
     "chai": "^3.5.0",
