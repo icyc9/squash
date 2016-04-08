@@ -24,8 +24,8 @@ describe('Squash', function () {
     })
   })
   describe('.reserve(time)', function () {
-    var time = "9:15 AM"
-    var date = "3/26/2016"
+    var time = "8:30 AM"
+    var date = "4/9/2016"
     it('Successfully makes a reservation', function (done) {
       subject.reserve(time, date)
       .then(function (success) {
