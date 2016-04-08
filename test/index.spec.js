@@ -1,4 +1,4 @@
-var Squash = require('../')
+var Squash = require('../lib')
 
 describe('Squash', function () {
   this.timeout(20000)

@@ -1,6 +1,6 @@
 # Setup commands
   - npm install 
-  -  npm run start_selenium
   
 # Run Test Suite
+ - npm run start_selenium ( start selenium server )
  - npm run test/watch
