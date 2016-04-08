@@ -13,6 +13,7 @@
   "dependencies": {
     "bluebird": "^3.3.4",
     "cheerio": "^0.20.0",
+    "dotenv": "^2.0.0",
     "selenium-standalone": "^5.1.0",
     "webdriverio": "^4.0.5"
   },

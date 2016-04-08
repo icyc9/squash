@@ -1,4 +1,5 @@
 var Squash = require('../lib')
+var config = require('../config')
 
 describe('Squash', function () {
   this.timeout(20000)
@@ -12,8 +13,8 @@ describe('Squash', function () {
   var subject = new Squash(options)
 
   describe('.login(username, password)', function () {
-    var username = "d0005496"
-    var password = "Newtyn123"
+    var username = config.yaleclub.username
+    var password = config.yaleclub.password
     it('Successfully logins in', function (done) {
       subject.login(username, password)
       .then(function (success) {
